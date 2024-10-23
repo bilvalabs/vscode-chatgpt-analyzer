@@ -1,0 +1,65 @@
+{
+  "name": "vscode-chatgpt-analyzer",
+  "displayName": "ChatGPT Project Analyzer",
+  "description": "Analyze project structure and content using ChatGPT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:chatgpt-analyzer.analyze"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "chatgpt-analyzer.analyze",
+        "title": "Analyze Project with ChatGPT"
+      },
+      {
+        "command": "chatgpt-analyzer.analyzeFile",
+        "title": "Analyze File with ChatGPT"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "chatgpt-analyzer.analyzeFile",
+          "when": "resourceScheme == file",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ChatGPT Analyzer",
+      "properties": {
+        "chatgptAnalyzer.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key"
+        },
+        "chatgptAnalyzer.maxFileSize": {
+          "type": "number",
+          "default": 100000,
+          "description": "Maximum file size to analyze (in bytes)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^4.9.0"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
